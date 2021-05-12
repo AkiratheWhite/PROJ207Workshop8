@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_agents">
+
+    <fragment
+        android:id="@+id/navigation_agents"
+        android:name="com.example.travelexpertsapp.ui.Agent.AgentFragment"
+        android:label="Agents"
+        tools:layout="@layout/fragment_agent" />
+
+    <fragment
+        android:id="@+id/navigation_customers"
+        android:name="com.example.travelexpertsapp.ui.home.HomeFragment"
+        android:label="Customers"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_suppliers"
+        android:name="com.example.travelexpertsapp.ui.notifications.NotificationsFragment"
+        android:label="Suppliers"
+        tools:layout="@layout/fragment_notifications" />
+</navigation>
