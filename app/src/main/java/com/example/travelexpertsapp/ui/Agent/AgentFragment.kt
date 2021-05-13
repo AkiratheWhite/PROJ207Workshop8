@@ -1,20 +1,21 @@
 package com.example.travelexpertsapp.ui.Agent
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.*
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.android.volley.Request
-import com.android.volley.RequestQueue
-import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.example.travelexpertsapp.R
-import org.json.JSONArray
+import com.example.travelexpertsapp.data.Agent
+import com.google.gson.Gson
+import java.util.*
 
 class AgentFragment : Fragment() {
 
@@ -22,33 +23,43 @@ class AgentFragment : Fragment() {
 
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         agentViewModel =
                 ViewModelProvider(this).get(AgentViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_agent, container, false)
-        val textView: TextView = root.findViewById(R.id.text_agent)
+        val agentListView = root.findViewById<ListView>(R.id.agentListView)
 
-        val mQueue = Volley.newRequestQueue(activity?.applicationContext);
+        getAgents(agentListView)
+        return root
+    }
 
+    private fun getAgents(list: ListView) {
+        val context = activity?.applicationContext
+        val mQueue = Volley.newRequestQueue(context)
         val url = "http://10.0.0.183:8080/Workshop_7_war_exploded/api/agent"
+        var output = ArrayList<Agent>()
+
         val request = JsonArrayRequest(Request.Method.GET, url, null,
             { response ->
-                textView.text = response.getJSONObject(1).toString()
+
+                val gson = Gson()
+
+                for (i in 0 until response.length()) {
+                    output.add(gson.fromJson(response.getJSONObject(i).toString(), Agent::class.java))
+                }
+
+                val listAdpt = context?.let { ArrayAdapter(it, android.R.layout.simple_list_item_1, output) }
+                list.adapter = listAdpt
+
             },
             { error ->
                 error.printStackTrace()
             }
         )
-
         mQueue.add(request)
-
-//        agentViewModel.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-//        })
-
-        return root
     }
+
 }
