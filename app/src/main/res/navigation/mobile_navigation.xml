@@ -18,8 +18,8 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_suppliers"
+        android:id="@+id/navigation_packages"
         android:name="com.example.travelexpertsapp.ui.notifications.NotificationsFragment"
-        android:label="Suppliers"
+        android:label="Packages"
         tools:layout="@layout/fragment_notifications" />
 </navigation>
