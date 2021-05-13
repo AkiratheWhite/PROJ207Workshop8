@@ -50,7 +50,7 @@ class AgentFragment : Fragment() {
     private fun getAgents(list: ListView) {
         val context = activity?.applicationContext
         val mQueue = Volley.newRequestQueue(context)
-        val url = "http://10.0.0.36:8080/Workshop_7_war_exploded/api/agent"
+        val url = "http://192.168.1.70:8080/Workshop_7_war_exploded/api/agent"
         var output = ArrayList<Agent>()
 
         val request = JsonArrayRequest(Request.Method.GET, url, null,

@@ -1,11 +1,14 @@
 package com.example.travelexpertsapp.ui.notifications
 
+import android.graphics.Color
+import android.media.Image
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -39,6 +42,7 @@ class NotificationsFragment : Fragment() {
         val pkgDesc = root.findViewById<TextView>(R.id.pkgDesc)
         val pkgBasePrice = root.findViewById<TextView>(R.id.pkgBasePrice)
         val pkgAgencyCommission = root.findViewById<TextView>(R.id.pkgAgencyCommission)
+        val img = root.findViewById<ImageView>(R.id.imageView2)
 
         lvPackages.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
             val c = lvPackages.getAdapter().getItem(position) as Package
@@ -49,16 +53,60 @@ class NotificationsFragment : Fragment() {
             pkgDesc.setText(c.pkgDesc);
             pkgBasePrice.setText("Base Price: " + "$"+c.pkgBasePrice);
             pkgAgencyCommission.setText("Commission: $" + c.pkgAgencyCommission);
+            if(c.packageId == 1)
+            {
+                img.setImageResource(R.drawable.one);
+                pkgName.setTextColor(Color.WHITE);
+                pkgStartDate.setTextColor(Color.WHITE);
+                pkgEndDate.setTextColor(Color.WHITE);
+                pkgDesc.setTextColor(Color.WHITE);
+                pkgBasePrice.setTextColor(Color.WHITE);
+                pkgAgencyCommission.setTextColor(Color.WHITE);
+            }
+           else if(c.packageId == 2)
+            {
+                img.setImageResource(R.drawable.two);
+                pkgName.setTextColor(Color.WHITE);
+                pkgStartDate.setTextColor(Color.WHITE);
+                pkgEndDate.setTextColor(Color.WHITE);
+                pkgDesc.setTextColor(Color.WHITE);
+                pkgBasePrice.setTextColor(Color.WHITE);
+                pkgAgencyCommission.setTextColor(Color.WHITE);
+            }
+            else if(c.packageId == 3)
+            {
+                img.setImageResource(R.drawable.three);
+                    pkgName.setTextColor(Color.BLACK);
+                    pkgStartDate.setTextColor(Color.BLACK);
+                    pkgEndDate.setTextColor(Color.BLACK);
+                    pkgDesc.setTextColor(Color.WHITE);
+                    pkgBasePrice.setTextColor(Color.BLACK);
+                    pkgAgencyCommission.setTextColor(Color.BLACK);
+
+            }
+            else
+            {
+                img.setImageResource(R.drawable.four);
+                pkgName.setTextColor(Color.WHITE);
+                pkgStartDate.setTextColor(Color.WHITE);
+                pkgEndDate.setTextColor(Color.WHITE);
+                pkgDesc.setTextColor(Color.WHITE);
+                pkgBasePrice.setTextColor(Color.WHITE);
+                pkgAgencyCommission.setTextColor(Color.WHITE);
+            }
         })
+
 
         getPackages(lvPackages)
         return root
     }
 
+
+
     private fun getPackages(list: ListView) {
         val context = activity?.applicationContext
         val mQueue = Volley.newRequestQueue(context)
-        val url = "http://10.0.0.36:8080/Workshop_7_war_exploded/api/package/get-all-packages"
+        val url = "http://192.168.1.70:8080/Workshop_7_war_exploded/api/package/get-all-packages"
         var output = ArrayList<Package>()
 
         val request = JsonArrayRequest(
@@ -92,4 +140,5 @@ class NotificationsFragment : Fragment() {
         )
         mQueue.add(request)
     }//..getPackages
+
 }//class NotificationsFragment
