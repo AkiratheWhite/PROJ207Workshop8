@@ -1,5 +1,10 @@
 package com.example.travelexpertsapp.data;
 
+/**
+ * Code written by: Tony (Zongzheng) Li
+ * Last modified on (DD/MM/YY): 05/14/21
+ */
+
 public class Agent {
 
     private Integer AgentId;

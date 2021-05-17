@@ -17,7 +17,12 @@ import com.example.travelexpertsapp.data.Agent
 import com.example.travelexpertsapp.data.Package
 import com.google.gson.Gson
 import java.util.*
-
+/**
+ * Code written by: Tony (Zongzheng) Li
+ * Last modified on (DD/MM/YY): 05/14/21
+ * Changelog:
+ * 1.0 - Changed layout and appearance. [Who did this?]
+ */
 class AgentFragment : Fragment() {
 
     private lateinit var agentViewModel: AgentViewModel
@@ -47,10 +52,13 @@ class AgentFragment : Fragment() {
         return root
     }
 
+    /**
+     * Method to retrieve agents from REST API running on Apache Tomcat. Url changes depending on who is running the Tomcat Server.
+     */
     private fun getAgents(list: ListView) {
         val context = activity?.applicationContext
         val mQueue = Volley.newRequestQueue(context)
-        val url = "http://192.168.1.70:8080/Workshop_7_war_exploded/api/agent"
+        val url = "http://10.0.0.183:8080/Workshop_7_war_exploded/api/agent"
         var output = ArrayList<Agent>()
 
         val request = JsonArrayRequest(Request.Method.GET, url, null,
